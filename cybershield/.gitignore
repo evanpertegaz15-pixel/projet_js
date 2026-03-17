@@ -1,0 +1,13 @@
+.env
+/test
+/node_modulest
+/dist
+/build
+.DS_Store
+*.log
+*.tmp
+*.bak
+*.swp
+.idea/
+.vscode/
+*.sublime-project
