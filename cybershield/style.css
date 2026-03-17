@@ -169,3 +169,7 @@ header p span {
     font-size: 0.8rem;
     color: var(--text-muted);
 }
+#entropy-display {
+    border: 1px solid var(--primary); /* Encadré pour souligner le bonus */
+    background: rgba(37, 99, 235, 0.05);
+}
