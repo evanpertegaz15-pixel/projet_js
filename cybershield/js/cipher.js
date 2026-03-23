@@ -22,6 +22,20 @@ const cesar = (message, decalage) => {
     if (sortie) sortie.textContent = resultat
 }
 
+const cesarLettre = (lettre, decalage) => {
+    const alphabetMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const alphabetMin = "abcdefghijklmnopqrstuvwxyz"
+    if (alphabetMaj.includes(lettre)) {
+        const index = (alphabetMaj.indexOf(lettre) + decalage) % 26
+        return alphabetMaj[index]
+    } else if (alphabetMin.includes(lettre)) {
+        const index = (alphabetMin.indexOf(lettre) + decalage) % 26
+        return alphabetMin[index]
+    } else {
+        return lettre
+    }
+}
+
 /**
  * Renvoie un tableau des possibilités de déchiffrement par force brute d'une chaîne de caractères.
  * @param {string} chaine = la chaîne à déchiffrer
@@ -83,6 +97,8 @@ const remplirTableau = (tableau) => {
         tableauForceBrute.appendChild(tr);
     });
 }
+
+const vigenere = (message, cle) => {}
 
 if (typeof document !== 'undefined') {
     const message = document.querySelector("#cipher-input")
