@@ -5,26 +5,37 @@
  */
 const cesar = (message, decalage) => {
     let resultat = ""
-    const alphabetMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    const alphabetMin = "abcdefghijklmnopqrstuvwxyz"
     for (let lettre of message) {
-        if (alphabetMaj.includes(lettre)) {
-            const index = (alphabetMaj.indexOf(lettre) + decalage) % 26
-            resultat += alphabetMaj[index]
-        } else if (alphabetMin.includes(lettre)) {
-            const index = (alphabetMin.indexOf(lettre) + decalage) % 26
-            resultat += alphabetMin[index]
-        } else {
-            resultat += lettre
-        }
+        resultat += cesarLettre(lettre, decalage)
     }
     const sortie = document.querySelector("#cipher-output")
     if (sortie) sortie.textContent = resultat
 }
 
 /**
+ * Chiffre une lettre avec un décalage donné.
+ * @param {string} lettre = la lettre à chiffrer
+ * @param {number} decalage = le décalage à appliquer
+ * @returns {string} = la lettre chiffrée
+ */
+const cesarLettre = (lettre, decalage) => {
+    const alphabetMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const alphabetMin = "abcdefghijklmnopqrstuvwxyz"
+    if (alphabetMaj.includes(lettre)) {
+        const index = (alphabetMaj.indexOf(lettre) + decalage) % 26
+        return alphabetMaj[index]
+    } else if (alphabetMin.includes(lettre)) {
+        const index = (alphabetMin.indexOf(lettre) + decalage) % 26
+        return alphabetMin[index]
+    } else {
+        return lettre
+    }
+}
+
+/**
  * Renvoie un tableau des possibilités de déchiffrement par force brute d'une chaîne de caractères.
  * @param {string} chaine = la chaîne à déchiffrer
+ * @return {Array} = un tableau des possibilités de déchiffrement
  */
 const forceBrute = (chaine) => {
     let resultat = []
@@ -45,7 +56,6 @@ const forceBrute = (chaine) => {
             tabIndex.push(null)
         }
     }
-
     for (let k = 1; k < 26; k++) {
         resultat[k-1] = ""
         for (let l = 0; l < tabIndex.length; l++) {
@@ -82,6 +92,28 @@ const remplirTableau = (tableau) => {
         tr.appendChild(td2);
         tableauForceBrute.appendChild(tr);
     });
+}
+
+/**
+ * Applique le chiffrement de Vigenère à une chaîne de caractères avec une clé donnée.
+ * @param {string} message = le message à chiffrer
+ * @param {string} cle = la clé de chiffrement
+ * @returns {string} = le message chiffré
+ */
+const vigenere = (message, cle) => {
+    let resultat = ""
+    let indexCle = 0
+    for (let lettre of message) {
+        if (!/[a-zA-Z]/.test(lettre)) {
+            resultat += lettre
+            continue
+        }
+        const lettreCle = cle[indexCle % cle.length]
+        const decalage = lettreCle.toUpperCase().charCodeAt(0) - 'A'.charCodeAt(0)
+        resultat += cesarLettre(lettre, decalage)
+        indexCle++
+    }
+    return resultat
 }
 
 if (typeof document !== 'undefined') {
