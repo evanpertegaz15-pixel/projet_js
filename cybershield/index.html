@@ -57,6 +57,38 @@
                 </div>
             </div>
         </section>
+        <section id="phishing-analyzer">
+    <h2>🎣 Détecteur de Phishing</h2>
+
+    <div class="input-group">
+        <label for="email-sender">Expéditeur :</label>
+        <input type="text" id="email-sender" placeholder="ex: noreply@paypa1.com">
+    </div>
+
+    <div class="input-group">
+        <label for="email-subject">Objet :</label>
+        <input type="text" id="email-subject" placeholder="ex: Urgent - Votre compte sera suspendu">
+    </div>
+
+    <div class="input-group">
+        <label for="email-body">Corps du message :</label>
+        <textarea id="email-body" rows="5" placeholder="Collez le contenu de l'e-mail ici..."></textarea>
+    </div>
+
+    <button id="analyze-email-btn">Analyser l'e-mail</button>
+
+    <div id="phishing-result" class="phishing-result hidden">
+        <div class="phishing-score-container">
+            <span>Score de suspicion : </span>
+            <strong id="phishing-score">0</strong><span>/100</span>
+        </div>
+        <div class="progress-container">
+            <div id="phishing-bar" class="progress-bar"></div>
+        </div>
+        <p>Verdict : <strong id="phishing-verdict"></strong></p>
+        <ul id="phishing-reasons"></ul>
+    </div>
+    </section>
     </main>
 
     <script src="js/password.js"></script>
