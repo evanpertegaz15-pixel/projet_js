@@ -113,7 +113,8 @@ const vigenere = (message, cle) => {
         resultat += cesarLettre(lettre, decalage)
         indexCle++
     }
-    return resultat
+    const sortie = document.querySelector("#cipher-output-vigenere")
+    if (sortie) sortie.textContent = resultat
 }
 
 if (typeof document !== 'undefined') {
@@ -121,6 +122,9 @@ if (typeof document !== 'undefined') {
     const decalage = document.querySelector("#shift-input")
     const boutonChiffrer = document.querySelector("#encrypt-btn")
     const boutonForceBrute = document.querySelector("#decrypt-btn")
+    const messageVigenere = document.querySelector("#cipher-input-vigenere")
+    const cleVigenere = document.querySelector("#vigenere-key")
+    const boutonVigenere = document.querySelector("#vigenere-encrypt-btn")
     boutonChiffrer.addEventListener("click", () => {
         cesar(message.value, Number(decalage.value))
     })
@@ -128,6 +132,9 @@ if (typeof document !== 'undefined') {
         const messageChiffre = document.querySelector("#cipher-output").textContent
         const resultats = forceBrute(messageChiffre)
         remplirTableau(resultats)
+    })
+    boutonVigenere.addEventListener("click", () => {
+        vigenere(messageVigenere.value, cleVigenere.value)
     })
 }
 
