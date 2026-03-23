@@ -33,16 +33,26 @@ const forceBrute = (chaine) => {
     const tabChaine = chaine.split('')
     const tabIndex = []
     for (let i = 0; i < tabChaine.length; i++) {
+        let trouve = false
         for (let j = 0; j < alphabetMaj.length; j++) {
             if (tabChaine[i] == alphabetMaj[j] || tabChaine[i] == alphabetMin[j]) {
                 tabIndex.push(j)
+                trouve = true
                 break
             }
         }
+        if (!trouve) {
+            tabIndex.push(null)
+        }
     }
+
     for (let k = 1; k < 26; k++) {
         resultat[k-1] = ""
         for (let l = 0; l < tabIndex.length; l++) {
+            if (tabIndex[l] === null) {
+                resultat[k-1] += tabChaine[l]
+                continue
+            }
             const index = (tabIndex[l] - (k % 26) + 26) % 26
             if (alphabetMaj.includes(tabChaine[l])) {
                 resultat[k-1] += alphabetMaj[index]
