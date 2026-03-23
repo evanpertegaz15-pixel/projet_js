@@ -46,6 +46,10 @@ header p span {
     font-weight: 600;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Navigation par onglets */
 .tab-navigation {
     display: flex;

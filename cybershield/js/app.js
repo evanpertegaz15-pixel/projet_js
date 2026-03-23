@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => { // S'assure que le DOM est
 
     const showSection = (moduleName) => {
         sections.forEach((section) => {
-            section.classList.toggle('hidden', section.id !== (moduleName === 'password' ? 'password-analyzer' : moduleName));
+            section.classList.toggle('hidden', section.id !== moduleName);
         });
     };
 
