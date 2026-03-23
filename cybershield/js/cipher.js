@@ -21,7 +21,8 @@ const cesar = (message, decalage) => {
             }
         }
     }
-    document.querySelector("#message_chiffre").textContent = resultat
+    const sortie = document.querySelector("#cipher-output")
+    if (sortie) sortie.textContent = resultat
 }
 
 /**
@@ -61,6 +62,8 @@ const forceBrute = (chaine) => {
  * @param {Array} tableau = le tableau à remplir
  */
 const remplirTableau = (tableau) => {
+    const tableauForceBrute = document.querySelector("#cipher-results")
+    if (!tableauForceBrute) return
     tableauForceBrute.innerHTML = ""
     tableau.forEach((ligne, i) => {
         const tr = document.createElement("tr");
@@ -74,13 +77,25 @@ const remplirTableau = (tableau) => {
     });
 }
 
-const message = document.querySelector("#message_a_chiffrer")
-const decalage = document.querySelector("#decalage")
-const bouton = document.querySelector("#bouton_chiffrer")
-const tableauForceBrute = document.querySelector("#tableau_force_brute")
+if (typeof document !== 'undefined') {
+    const message = document.querySelector("#cipher-input")
+    const decalage = document.querySelector("#shift-input")
+    const boutonChiffrer = document.querySelector("#encrypt-btn")
+    const boutonForceBrute = document.querySelector("#decrypt-btn")
+    if (message && decalage) {
+        boutonChiffrer.addEventListener("click", () => {
+            cesar(message.value, Number(decalage.value));
+            const valeurChiffree = document.querySelector("#cipher-output").textContent
+            if (valeurChiffree) {
+                boutonForceBrute.addEventListener("click", () => {
+                    const resultats = forceBrute(valeurChiffree);
+                    remplirTableau(resultats);
+                });
+            }
+        });
+    }
+}
 
-bouton.addEventListener("click", () => {
-    cesar(message.value, Number(decalage.value));
-    const tableau = forceBrute(document.querySelector("#message_chiffre").textContent);
-    remplirTableau(tableau);
-});
+if (typeof module !== 'undefined') {
+    module.exports = { cesar, forceBrute, remplirTableau };
+}

@@ -50,4 +50,24 @@ document.addEventListener('DOMContentLoaded', () => { // S'assure que le DOM est
             console.log("Analyse CyberShield :", analysis);
         });
     }
+
+    // Gestion de la navigation par onglets
+    const tabs = document.querySelectorAll('.tab-btn');
+    const sections = document.querySelectorAll('.module-card');
+
+    const showSection = (moduleName) => {
+        sections.forEach((section) => {
+            section.classList.toggle('hidden', section.id !== (moduleName === 'password' ? 'password-analyzer' : moduleName));
+        });
+    };
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            tabs.forEach((btn) => btn.classList.remove('active'));
+            tab.classList.add('active');
+
+            const moduleName = tab.dataset.module;
+            showSection(moduleName);
+        });
+    });
 });
