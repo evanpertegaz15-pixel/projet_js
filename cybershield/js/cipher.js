@@ -5,20 +5,17 @@
  */
 const cesar = (message, decalage) => {
     let resultat = ""
-    const alphabet = /[a-zA-Z]/ // ASCII -> A-Z = 65-90 ; a-z = 97-122
-    const tabMessage = message.split('') // transforme la chaîne en tableau
-    let chaineValide = true
-    if ((decalage >= 1) && (decalage <= 25)) {
-        for (character of tabMessage) {
-            if (!character.match(alphabet)) {
-                chaineValide = false
-                break
-            }
-        }
-        if (chaineValide) {
-            for (character of tabMessage) {
-                resultat += String.fromCharCode(character.charCodeAt(0) + decalage) // utilisation du code ASCII
-            }
+    const alphabetMaj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    const alphabetMin = "abcdefghijklmnopqrstuvwxyz"
+    for (let lettre of message) {
+        if (alphabetMaj.includes(lettre)) {
+            const index = (alphabetMaj.indexOf(lettre) + decalage) % 26
+            resultat += alphabetMaj[index]
+        } else if (alphabetMin.includes(lettre)) {
+            const index = (alphabetMin.indexOf(lettre) + decalage) % 26
+            resultat += alphabetMin[index]
+        } else {
+            resultat += lettre
         }
     }
     const sortie = document.querySelector("#cipher-output")
@@ -82,18 +79,14 @@ if (typeof document !== 'undefined') {
     const decalage = document.querySelector("#shift-input")
     const boutonChiffrer = document.querySelector("#encrypt-btn")
     const boutonForceBrute = document.querySelector("#decrypt-btn")
-    if (message && decalage) {
-        boutonChiffrer.addEventListener("click", () => {
-            cesar(message.value, Number(decalage.value));
-            const valeurChiffree = document.querySelector("#cipher-output").textContent
-            if (valeurChiffree) {
-                boutonForceBrute.addEventListener("click", () => {
-                    const resultats = forceBrute(valeurChiffree);
-                    remplirTableau(resultats);
-                });
-            }
-        });
-    }
+    boutonChiffrer.addEventListener("click", () => {
+        cesar(message.value, Number(decalage.value))
+    })
+    boutonForceBrute.addEventListener("click", () => {
+        const messageChiffre = document.querySelector("#cipher-output").textContent
+        const resultats = forceBrute(messageChiffre)
+        remplirTableau(resultats)
+    })
 }
 
 if (typeof module !== 'undefined') {
