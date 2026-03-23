@@ -60,11 +60,27 @@ const forceBrute = (chaine) => {
  * Remplit le tableau avec les possibilités de déchiffrement.
  * @param {Array} tableau = le tableau à remplir
  */
-const remplirTableau = (tableau) => {}
+const remplirTableau = (tableau) => {
+    tableauForceBrute.innerHTML = ""
+    tableau.forEach((ligne, i) => {
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        td1.textContent = i + 1;
+        const td2 = document.createElement("td");
+        td2.textContent = ligne;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tableauForceBrute.appendChild(tr);
+    });
+}
 
 const message = document.querySelector("#message_a_chiffrer")
 const decalage = document.querySelector("#decalage")
 const bouton = document.querySelector("#bouton_chiffrer")
 const tableauForceBrute = document.querySelector("#tableau_force_brute")
 
-bouton.addEventListener("click", cesar(message, decalage))
+bouton.addEventListener("click", () => {
+    cesar(message.value, Number(decalage.value));
+    const tableau = forceBrute(document.querySelector("#message_chiffre").textContent);
+    remplirTableau(tableau);
+});

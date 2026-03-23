@@ -57,6 +57,26 @@
                 </div>
             </div>
         </section>
+        <section id="cipher" class="module-card hidden">
+            <div class="card-header">
+                <h2>Force brute (Chiffrement César)</h2>
+                <p>Testez toutes les combinaisons possibles.</p>
+            </div>
+            <div class="input-group">
+                <label for="cipher-input">Texte à déchiffrer</label>
+                <input type="text" id="cipher-input" placeholder="Entrez un texte chiffré...">
+            </div>
+            <button id="cipher-btn">Lancer la force brute</button>
+            <table class="result-table">
+                <thead>
+                    <tr>
+                        <th>Décalage</th>
+                        <th>Résultat</th>
+                    </tr>
+                </thead>
+                <tbody id="cipher-results"></tbody>
+            </table>
+        </section>
     </main>
 
     <script src="js/password.js"></script>
