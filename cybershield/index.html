@@ -57,6 +57,25 @@
                 </div>
             </div>
         </section>
+        <section id="phishing-detector" class="module-card" style="display: none;">
+            <div class="card-header">
+                <h2>Détecteur de Phishing</h2>
+                <p>Analysez un e-mail pour détecter des tentatives de fraude.</p>
+            </div>
+
+            <div class="input-group">
+                <label for="email-sender">Expéditeur</label>
+                <input type="text" id="email-sender" placeholder="ex: security@paypa1.com">
+
+                <label for="email-subject">Objet</label>
+                <input type="text" id="email-subject" placeholder="Sujet de l'e-mail">
+
+                <label for="email-body">Corps du message</label>
+                <textarea id="email-body" rows="5" placeholder="Collez le contenu de l'e-mail ici..."></textarea>
+            </div>
+
+            <div id="phishing-result" class="analyzer-feedback"></div>
+        </section>
     </main>
 
     <script src="js/password.js"></script>
