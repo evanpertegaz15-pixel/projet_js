@@ -22,9 +22,7 @@
             <button class="tab-btn" data-module="phishing">Phishing</button>
             <button class="tab-btn" data-module="dashboard">Veille</button>
         </nav>
-
-        <!-- ✅ id mis à jour : password-analyzer (fichier 2) -->
-        <section id="password-analyzer" class="module-card">
+        <section id="password" class="module-card">
             <div class="card-header">
                 <h2>Analyseur de robustesse</h2>
                 <p>Testez la force de vos mots de passe en temps réel.</p>
@@ -58,28 +56,32 @@
                 </div>
             </div>
         </section>
-
         <section id="cipher" class="module-card hidden">
             <div class="card-header">
                 <h2>Chiffrement/Déchiffrement César</h2>
                 <p>Chiffrement avec décalage ou force brute du message.</p>
             </div>
+            
             <div class="input-group">
                 <label for="cipher-input">Texte clair / chiffré</label>
                 <input type="text" id="cipher-input" placeholder="Entrez votre texte ici...">
             </div>
+            
             <div class="input-group">
                 <label for="shift-input">Décalage</label>
                 <input type="number" id="shift-input" min="1" max="25" value="1">
             </div>
+            
             <div class="button-group">
                 <button id="encrypt-btn">Chiffrer</button>
                 <button id="decrypt-btn">Force brute</button>
             </div>
+            
             <div class="output-group">
                 <span class="label">Résultat</span>
                 <div id="cipher-output" class="output-box">(vide)</div>
             </div>
+            
             <table class="result-table">
                 <thead>
                     <tr>
@@ -89,6 +91,7 @@
                 </thead>
                 <tbody id="cipher-results"></tbody>
             </table>
+
             <div class="cipher-section" id="vigenere-section">
                 <h3>Chiffrement Vigenère</h3>
                 <div class="input-group">
@@ -102,14 +105,12 @@
                 <div class="button-group">
                     <button id="vigenere-encrypt-btn">Chiffrer (Vigenère)</button>
                 </div>
-                    <div class="output-group">
-                        <span class="label">Résultat</span>
+                <div class="output-group">
+                    <span class="label">Résultat</span>
                     <div id="cipher-output-vigenere" class="output-box">(vide)</div>
                 </div>
             </div>
         </section>
-
-        <!-- ✅ Section phishing complète (fichier 2) -->
         <section id="phishing" class="module-card hidden">
             <div class="card-header">
                 <h2>🎣 Détecteur de Phishing</h2>
@@ -128,8 +129,7 @@
 
             <div class="input-group">
                 <label for="phishing-body">Corps du message</label>
-                <textarea id="phishing-body" rows="5"
-                    placeholder="Collez le contenu de l'e-mail ici..."></textarea>
+                <textarea id="phishing-body" rows="5" placeholder="Collez le contenu de l'e-mail ici..."></textarea>
             </div>
 
             <button id="phishing-analyze-btn" class="btn-primary">Analyser</button>
@@ -151,14 +151,27 @@
                 <ul id="phishing-reasons" class="phishing-reasons-list"></ul>
             </div>
         </section>
+        <section id="dashboard" class="module-card hidden">
+            <div class="card-header">
+                <h2>Dashboard Veille Cybersécurité</h2>
+                <p>Dernières actualités et niveau d'alerte en temps réel</p>
+            </div>
+            
+            <div class="controls">
+                <input type="text" id="search-input" placeholder="🔍 Rechercher (ransomware, phishing...)">
+                <div class="alert-level">
+                    Niveau d'alerte: <span id="alert-level">Chargement...</span>
+                </div>
+            </div>
 
-        <!-- ✅ Section dashboard conservée (fichier 1) -->
-        <section id="dashboard" class="module-card hidden"></section>
+            <div id="dashboard-articles" class="articles-grid">
+                <p>Chargement des actualités...</p>
+            </div>
+        </section>
     </main>
-
+    <script src="js/dashboard.js"></script>
     <script src="js/password.js"></script>
-    <script src="js/phishing.js"></script>
+    <script src="js/phising.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/cipher.5b0ec3a8.min.js"></script>
 </body>
 </html>
