@@ -223,5 +223,62 @@ const questions = {
             explication: "Les permissions excessives peuvent révéler un comportement suspect."
         }
     ],
-    difficile: []
+    difficile: [
+        {
+            id: 1,
+            question: "Quel signe technique peut indiquer qu'un site web est victime d'un empoisonnement DNS (DNS poisoning) ?",
+            options: [
+                "L'IP du domaine ne correspond pas à celle attendue",
+                "Le certificat TLS expire bientôt",
+                "Le site met plus de temps à charger",
+                "Le site utilise un CDN (Content Delivery Network)"
+            ],
+            reponse: 0,
+            explication: "Le DNS poisoning redirige vers une IP frauduleuse malgré une URL correcte."
+        }, {
+            id: 2,
+            question: "Quel principe de sécurité réduit fortement l'impact d'une compromission de compte ?",
+            options: [
+                "L'utilisation d'un compte administrateur",
+                "La désactivation du pare-feu",
+                "Le partage des identifiants entre collègues",
+                "Le principe de moindre privilège"
+            ],
+            reponse: 3,
+            explication: "Limiter les privilèges empêche un attaquant d'étendre facilement son contrôle."
+        }, {
+            id: 3,
+            question: "Quelle permission d'application mobile est considérée comme particulièrement sensible car elle permet une surveillance indirecte ?",
+            options: [
+                "Accès à la caméra",
+                "Accès à la géolocalisation",
+                "Accès au microphone",
+                "Accès aux contacts"
+            ],
+            reponse: 1,
+            explication: "L'accès à la géolocalisation permet de déduire habitudes, déplacements et même de profiler l'utilisateur, ce qui est une menace pour la vie privée."
+        }, {
+            id: 4,
+            question: "Quel mécanisme garantit que même un fournisseur de services cloud ne peut pas accéder aux données d'un utilisateur ?",
+            options: [
+                "L'utilisation de mots de passe forts",
+                "La redondance des serveurs",
+                "Le chiffrement côté client",
+                "Le chiffrement TLS lors du transfert"
+            ],
+            reponse: 2,
+            explication: "Le chiffrement côté client garantit que seules les clés locales permettent la lecture des données."
+        }, {
+            id: 5,
+            question: "Quel indice dans des logs peut révéler une tentative d'escalade de privilèges ?",
+            options: [
+                "Des connexions réussies à des heures de travail normales",
+                "Des erreurs d'authentification répétées",
+                "Des tentatives de connexion à des ports inhabituels",
+                "Une augmentation soudaine du trafic réseau"
+            ],
+            reponse: 1,
+            explication: "Les escalades de privilèges se manifestent souvent par des erreurs d'authentification répétées ou refusées sur des comptes à privilèges."
+        }
+    ]
 };
