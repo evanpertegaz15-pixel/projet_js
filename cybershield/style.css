@@ -222,3 +222,118 @@ header p span {
     border: 1px solid var(--primary); /* Encadré pour souligner le bonus */
     background: rgba(37, 99, 235, 0.05);
 }
+/* ============================================================
+   Styles à ajouter à la fin de style.css
+   Section : Détecteur de Phishing
+   ============================================================ */
+
+/* Textarea */
+.input-group textarea {
+    padding: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+    color: var(--text-main);
+}
+
+.input-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Bouton principal */
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease;
+    margin-bottom: 1.5rem;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Bloc résultat phishing */
+.phishing-result {
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* En-tête score */
+.phishing-score-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+/* Cercle score */
+.phishing-score-circle {
+    min-width: 80px;
+    min-height: 80px;
+    border-radius: 50%;
+    border: 4px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+    transition: border-color 0.4s ease, color 0.4s ease;
+    flex-shrink: 0;
+}
+
+.phishing-score-circle small {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* Badge niveau */
+.phishing-level-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    transition: all 0.4s ease;
+}
+
+/* Liste des raisons */
+.phishing-reasons-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.phishing-reasons-list li {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.5;
+}
