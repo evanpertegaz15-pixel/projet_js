@@ -91,6 +91,7 @@
                 </thead>
                 <tbody id="cipher-results"></tbody>
             </table>
+
             <div class="cipher-section" id="vigenere-section">
                 <h3>Chiffrement Vigenère</h3>
                 <div class="input-group">
@@ -112,22 +113,43 @@
         </section>
         <section id="phishing" class="module-card hidden">
             <div class="card-header">
-                <h2>Détecteur de Phishing</h2>
-                <p>Analysez un e-mail pour détecter des tentatives de fraude.</p>
+                <h2>🎣 Détecteur de Phishing</h2>
+                <p>Analysez un e-mail suspect et obtenez un score de suspicion.</p>
             </div>
 
             <div class="input-group">
-                <label for="email-sender">Expéditeur</label>
-                <input type="text" id="email-sender" placeholder="ex: security@paypa1.com">
-
-                <label for="email-subject">Objet</label>
-                <input type="text" id="email-subject" placeholder="Sujet de l'e-mail">
-
-                <label for="email-body">Corps du message</label>
-                <textarea id="email-body" rows="5" placeholder="Collez le contenu de l'e-mail ici..."></textarea>
+                <label for="phishing-sender">Expéditeur</label>
+                <input type="text" id="phishing-sender" placeholder="ex: support@paypa1.com">
             </div>
 
-            <div id="phishing-result" class="analyzer-feedback"></div>
+            <div class="input-group">
+                <label for="phishing-subject">Objet</label>
+                <input type="text" id="phishing-subject" placeholder="ex: Action requise — votre compte sera suspendu">
+            </div>
+
+            <div class="input-group">
+                <label for="phishing-body">Corps du message</label>
+                <textarea id="phishing-body" rows="5" placeholder="Collez le contenu de l'e-mail ici..."></textarea>
+            </div>
+
+            <button id="phishing-analyze-btn" class="btn-primary">Analyser</button>
+
+            <div id="phishing-result" class="phishing-result hidden">
+                <div class="phishing-score-header">
+                    <div class="phishing-score-circle">
+                        <span id="phishing-score-value">0</span>
+                        <small>/100</small>
+                    </div>
+                    <div>
+                        <div id="phishing-level-label" class="phishing-level-badge">---</div>
+                        <div class="progress-container" style="margin-top: 8px; margin-bottom: 0;">
+                            <div id="phishing-bar" class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul id="phishing-reasons" class="phishing-reasons-list"></ul>
+            </div>
         </section>
         <section id="dashboard" class="module-card hidden">
             <div class="card-header">
