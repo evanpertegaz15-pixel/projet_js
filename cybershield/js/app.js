@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         password:  'password-analyzer',
         cipher:    'cipher',
         phishing:  'phishing',
-        dashboard: 'dashboard'
+        dashboard: 'dashboard',
+        quiz: 'quiz'
     };
 
     const showSection = (moduleName) => {
