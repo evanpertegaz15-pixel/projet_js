@@ -4,7 +4,41 @@
 
 // S'assure que le DOM est chargé avant d'attacher les événements
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Module Rapport (Séance 4 Partie B) ---
+const reportBtn = document.getElementById('generate-report-btn');
+const modal = document.getElementById('report-modal');
+const closeBtn = document.getElementById('close-modal');
+const reportBody = document.getElementById('report-body');
 
+if (reportBtn) {
+    reportBtn.addEventListener('click', () => {
+        const report = window.reportModule.generateSecurityReport();
+        
+        // Injection du contenu dans le modal 
+        reportBody.innerHTML = `
+            <div class="report-section">
+                <h3>Résumé Global</h3>
+                <p><strong>Date :</strong> ${report.date}</p>
+                <p><strong>Score Quiz moyen :</strong> ${report.summary.averageQuizScore}/100</p>
+            </div>
+            <div class="report-section">
+                <h3>Recommandations</h3>
+                <ul>${report.recommendations.map(r => `<li>${r}</li>`).join('')}</ul>
+            </div>
+        `;
+        
+        modal.classList.remove('hidden');
+    });
+}
+
+// Gestion de l'export JSON
+document.getElementById('download-report-json')?.addEventListener('click', () => {
+    const data = window.reportModule.generateSecurityReport();
+    window.reportModule.exportToJSON(data);
+});
+
+// Fermeture modal
+closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
     // --- Module mot de passe ---
     const passwordInput  = document.getElementById('password-input');
     const strengthBar    = document.getElementById('strength-bar');
@@ -110,5 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Analyse phishing :', result);
         });
     }
-
+    document.getElementById('print-report')?.addEventListener('click', () => {
+    window.print(); // Utilise les media queries CSS @media print pour le style
+});
 });

@@ -23,9 +23,8 @@ function analyzePassword(password) {
     };
 
     const symbols = "!@#$%^&*()_+-=[]{}|;':\",./<>? ";
-    let R = 0; // Taille de l'alphabet (Range) 
+    let R = 0; 
 
-    // Parcours avec for...of (Contrainte technique) [cite: 51]
     for (const char of password) {
         if (char >= 'A' && char <= 'Z') stats.hasUpper = true;
         else if (char >= 'a' && char <= 'z') stats.hasLower = true;
@@ -33,33 +32,40 @@ function analyzePassword(password) {
         else if (symbols.includes(char)) stats.hasSymbol = true;
     }
 
-    // Calcul de R (taille de l'alphabet utilisé) 
     if (stats.hasLower) R += 26;
     if (stats.hasUpper) R += 26;
     if (stats.hasNumber) R += 10;
     if (stats.hasSymbol) R += symbols.length;
 
-    // Calcul de l'entropie (L * log2(R)) 
-    // Math.log2(R) donne le nombre de bits par caractère
     const entropy = (R > 0 && password.length > 0) 
         ? (password.length * Math.log2(R)) 
         : 0;
 
-    // Barème officiel de l'énoncé [cite: 53]
     if (password.length > 8) score += (password.length - 8) * 2;
     if (stats.hasUpper) score += 15;
     if (stats.hasNumber) score += 15;
     if (stats.hasSymbol) score += 20;
     if (!stats.isBlacklisted && password.length > 0) score += 20;
 
-    return {
+    // 1. On prépare l'objet de résultat final
+    const analysis = {
         score: Math.min(score, 100),
         stats: stats,
-        entropy: entropy.toFixed(2), // On arrondit à 2 décimales pour l'affichage [cite: 58]
+        entropy: entropy.toFixed(2),
         label: getStrengthLabel(score, stats.isBlacklisted)
     };
-}
 
+    // 2. ON SAUVEGARDE (AVANT LE RETURN)
+    // On utilise les données de l'objet "analysis" qu'on vient de créer
+    const resultToSave = {
+        score: analysis.score,
+        label: analysis.label.text
+    };
+    localStorage.setItem('lastPassword', JSON.stringify(resultToSave));
+    
+    // 3. ON RETOURNE L'OBJET (FIN DE LA FONCTION)
+    return analysis; 
+}
 /**
  * Détermine le libellé de force et la couleur associée.
  */
