@@ -62,6 +62,7 @@ function analyzePassword(password) {
         label: analysis.label.text
     };
     localStorage.setItem('lastPassword', JSON.stringify(resultToSave));
+    localStorage.setItem('lastPassword', JSON.stringify({ score: analysis.score, label: analysis.label.text }));
     
     // 3. ON RETOURNE L'OBJET (FIN DE LA FONCTION)
     return analysis; 

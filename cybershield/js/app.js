@@ -4,22 +4,30 @@
 
 // S'assure que le DOM est chargé avant d'attacher les événements
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Module Rapport (Séance 4 Partie B) ---
+    
+// --- Module Rapport (Séance 4 Partie B) ---
 const reportBtn = document.getElementById('generate-report-btn');
 const modal = document.getElementById('report-modal');
 const closeBtn = document.getElementById('close-modal');
 const reportBody = document.getElementById('report-body');
 
+// Appel sécurisé au chargement initial
+if (window.reportModule) {
+        window.reportModule.updateDashboard(); 
+    }
+
 if (reportBtn) {
     reportBtn.addEventListener('click', () => {
         const report = window.reportModule.generateSecurityReport();
         
-        // Injection du contenu dans le modal 
+        // Injection du contenu avec les BONNES CLÉS du report.js
         reportBody.innerHTML = `
             <div class="report-section">
                 <h3>Résumé Global</h3>
                 <p><strong>Date :</strong> ${report.date}</p>
-                <p><strong>Score Quiz moyen :</strong> ${report.summary.averageQuizScore}/100</p>
+                <p><strong>Score Quiz moyen :</strong> ${report.summary.scoreMoyenQuiz}</p>
+                <p><strong>Dernier Mot de passe :</strong> ${report.summary.forceDernierPassword}</p>
+                <p><strong>E-mails analysés :</strong> ${report.summary.emailsAnalyses}</p>
             </div>
             <div class="report-section">
                 <h3>Recommandations</h3>
@@ -74,6 +82,7 @@ closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
     // idMap permet de faire correspondre le data-module au vrai id de section
     // (nécessaire car la section password a l'id "password-analyzer")
     const idMap = {
+        home: 'home',
         password:  'password-analyzer',
         cipher:    'cipher',
         phishing:  'phishing',
@@ -82,9 +91,14 @@ closeBtn?.addEventListener('click', () => modal.classList.add('hidden'));
     };
 
     const showSection = (moduleName) => {
-        sections.forEach((section) => {
-            section.classList.toggle('hidden', section.id !== idMap[moduleName]);
-        });
+    sections.forEach((section) => {
+        section.classList.toggle('hidden', section.id !== idMap[moduleName]);
+    });
+
+    // AJOUT : Si on affiche l'accueil, on rafraîchit les chiffres du dashboard
+    if (moduleName === 'home' && window.reportModule) {
+        window.reportModule.updateDashboard();
+    }
     };
 
     tabs.forEach((tab) => {

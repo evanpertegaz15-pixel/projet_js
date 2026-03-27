@@ -1,45 +1,104 @@
-// js/report.js
-const generateSecurityReport = () => {
-    // Récupération des données persistées
-    const quizScores = JSON.parse(localStorage.getItem('quizScores')) || [];
-    const avgQuizScore = quizScores.length > 0 
-        ? (quizScores.reduce((a, b) => a + b, 0) / quizScores.length).toFixed(1) 
-        : "N/A";
+/**
+ * js/report.js 
+ * Gestionnaire central du Tableau de Bord et des Rapports
+ */
 
-    const lastPwd = JSON.parse(localStorage.getItem('lastPassword')) || { score: 0, label: "Non testé" };
-    const phishingStats = JSON.parse(localStorage.getItem('phishingStats')) || { total: 0, detected: 0 };
-    
-    const phishingRate = phishingStats.total > 0 
-        ? ((phishingStats.detected / phishingStats.total) * 100).toFixed(0) 
-        : 0;
+const reportModule = {
+    // 1. MISE À JOUR DU DASHBOARD (ACCUEIL) - Séance 4 Partie A
+    updateDashboard: function() {
+        console.log("Chargement des données du tableau de bord...");
 
-    const reportData = {
-        date: new Date().toLocaleString(),
-        summary: {
-            quizScore: avgQuizScore,
-            passwordStrength: lastPwd.label,
-            emailsAnalyzed: phishingStats.total,
-            phishingRate: phishingRate + "%"
-        },
-        recommendations: []
-    };
+        // Récupération des données avec les clés utilisées dans les autres modules
+        const quizScores = JSON.parse(localStorage.getItem('cybershield_quiz_scores')) || [];
+        const lastPwd = JSON.parse(localStorage.getItem('lastPassword')) || { label: "N/A" };
+        const phishStats = JSON.parse(localStorage.getItem('phishingStats')) || { total: 0, detected: 0 };
 
-    // Recommandations dynamiques
-    if (lastPwd.score < 50) reportData.recommendations.push("Améliorez la complexité de vos mots de passe.");
-    if (phishingStats.total > 0 && phishingRate > 30) reportData.recommendations.push("Attention : vous identifiez beaucoup d'e-mails comme suspects, restez vigilant.");
+        // Calcul du score moyen (persisté) [cite: 141]
+        // Dans report.js -> updateDashboard
+        const avgQuiz = quizScores.length > 0 
+            ? Math.round(quizScores.reduce((acc, s) => acc + (s.score || 0), 0) / quizScores.length) 
+            : 0;
+                
+        // Calcul du taux de phishing [cite: 143]
+        const phishRate = phishStats.total > 0 
+            ? Math.round((phishStats.detected / phishStats.total) * 100) 
+            : 0;
 
-    return reportData;
+        // Mise à jour des éléments du DOM [cite: 140, 141, 142, 143]
+        const elQuiz = document.getElementById('dash-quiz-avg');
+        const elPwd = document.getElementById('dash-pwd-strength');
+        const elPhishCount = document.getElementById('dash-phishing-count');
+        const elPhishRate = document.getElementById('dash-phishing-rate');
+
+        if (elQuiz) elQuiz.textContent = avgQuiz;
+        if (elPwd) elPwd.textContent = lastPwd.label;
+        if (elPhishCount) elPhishCount.textContent = phishStats.total;
+        if (elPhishRate) elPhishRate.textContent = phishRate;
+    },
+
+    // 2. GÉNÉRATION DES DONNÉES DU RAPPORT (MODALE) - Séance 4 Partie B
+    generateSecurityReport: function() {
+        const quizScores = JSON.parse(localStorage.getItem('cybershield_quiz_scores')) || [];
+        const lastPwd = JSON.parse(localStorage.getItem('lastPassword')) || { label: 'Non testé', score: 0 };
+        const phishStats = JSON.parse(localStorage.getItem('phishingStats')) || { total: 0, detected: 0 };
+        
+        const avgQuiz = quizScores.length > 0 
+            ? Math.round(quizScores.reduce((acc, s) => acc + s.score, 0) / quizScores.length) 
+            : 0;
+
+        // Structure de l'objet rapport pour le modal [cite: 146, 147]
+        const report = {
+            date: new Date().toLocaleString('fr-FR'),
+            summary: {
+                scoreMoyenQuiz: avgQuiz + "/100",
+                forceDernierPassword: lastPwd.label,
+                emailsAnalyses: phishStats.total,
+                menacesDetectees: phishStats.detected
+            },
+            recommendations: []
+        };
+
+        // Logique de recommandations dynamiques [cite: 119, 146]
+        if (avgQuiz < 50) {
+            report.recommendations.push("Connaissances théoriques faibles : Refaites quelques sessions de Quiz.");
+        }
+        if (lastPwd.score < 60) {
+            report.recommendations.push("Sécurité des comptes : Utilisez des phrases de passe plus longues et des symboles.");
+        }
+        if (phishStats.total < 3) {
+            report.recommendations.push("Entraînement Phishing : Testez plus d'emails pour affiner votre intuition.");
+        }
+        if (report.recommendations.length === 0) {
+            report.recommendations.push("Excellent travail ! Votre niveau de vigilance est optimal.");
+        }
+
+        return report;
+    },
+
+    // 3. EXPORTATION JSON (Blob + URL.createObjectURL) [cite: 152]
+    exportToJSON: function(data) {
+        try {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `CyberShield_Rapport_${new Date().getTime()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Erreur lors de l'export JSON:", error);
+        }
+    }
 };
 
-// Fonction d'export JSON demandée (Blob + URL.createObjectURL) 
-const exportToJSON = (data) => {
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `CyberShield_Rapport.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-};
+// Exposition globale pour les autres modules [cite: 37, 43]
+window.reportModule = reportModule;
 
-window.reportModule = { generateSecurityReport, exportToJSON };
+// Initialisation au chargement du DOM [cite: 53, 139]
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.reportModule) {
+        window.reportModule.updateDashboard();
+    }
+});

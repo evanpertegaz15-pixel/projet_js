@@ -346,5 +346,8 @@ document.addEventListener('DOMContentLoaded', () => {
             + topScores.map((s, i) => `<li>#${i + 1} — ${s.score} pts (${s.date})</li>`).join('')
             + '</ul>';
         previewEl.classList.remove('hidden');
+    let scores = JSON.parse(localStorage.getItem('quizScores')) || [];
+    scores.push(currentScore);
+    localStorage.setItem('quizScores', JSON.stringify(scores));
     }
 });

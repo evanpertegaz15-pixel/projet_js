@@ -107,6 +107,7 @@ function analyzeEmail(emailObject) {
     stats.total++;
     if (result.score > 50) stats.detected++;
     localStorage.setItem('phishingStats', JSON.stringify(stats));
+    window.reportModule.updateDashboard();
 
     return result; // Retourne l'objet complet
 }

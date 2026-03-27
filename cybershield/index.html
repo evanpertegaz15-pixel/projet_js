@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button class="tab-btn active" data-module="home">Accueil</button>
     <header>
         <div class="header-content">
             <h1>CyberShield</h1>
@@ -16,6 +17,47 @@
     </header>
 
     <main>
+        <section id="home" class="module-card">
+        <div class="card-header">
+            <h2>Tableau de Bord Global</h2>
+            <p>Résumé de votre activité de sécurité numérique.</p>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric-box">
+                <span class="label">Score Quiz Moyen</span>
+                <span id="dash-quiz-avg" class="value">0</span><span class="unit">/100</span>
+            </div>
+            <div class="metric-box">
+                <span class="label">Dernier Mot de Passe</span>
+                <span id="dash-pwd-strength" class="value">---</span>
+            </div>
+            <div class="metric-box">
+                <span class="label">E-mails Analysés</span>
+                <span id="dash-phishing-count" class="value">0</span>
+            </div>
+            <div class="metric-box">
+                <span class="label">Taux Phishing</span>
+                <span id="dash-phishing-rate" class="value">0</span><span class="unit">%</span>
+            </div>
+        </div>
+        
+        <div class="button-group" style="margin-top: 20px;">
+            <button id="generate-report-btn" class="btn-primary">Générer Rapport Complet</button>
+        </div>
+    </section>
+
+    <div id="report-modal" class="modal hidden">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h2>Rapport de Sécurité Personnalisé</h2>
+            <div id="report-body">
+                </div>
+            <div class="button-group">
+                <button id="download-report-json">Exporter en JSON</button>
+                <button onclick="window.print()">Imprimer</button>
+            </div>
+        </div>
+    </div>
         <nav class="tab-navigation">
             <button class="tab-btn active" data-module="password">Analyseur</button>
             <button class="tab-btn" data-module="cipher">Chiffrement</button>
@@ -169,6 +211,50 @@
                 <p>Chargement des actualités...</p>
             </div>
         </section>
+        <section id="quiz" class="module-card hidden">
+            <div id="quiz-start">
+                <div class="card-header">
+                    <h2>🛡️ Quiz de Sensibilisation</h2>
+                    <p>Testez vos connaissances et gagnez des points.</p>
+                </div>
+                <div id="quiz-scores-preview" class="hidden"></div>
+                <button id="quiz-start-btn" class="btn-primary">Commencer le Quiz</button>
+            </div>
+
+            <div id="quiz-game" class="hidden">
+                <div class="quiz-header">
+                    <span id="quiz-timer">20</span>
+                    <div class="progress-container">
+                        <div id="quiz-progress-bar" class="progress-bar"></div>
+                    </div>
+                </div>
+                <div class="quiz-meta">
+                    <span id="quiz-question-counter">Question 1 / 10</span>
+                    <span id="quiz-level-badge">Facile</span>
+                    <span id="quiz-streak-display">0</span>
+                </div>
+                <h3 id="quiz-question-text">Chargement...</h3>
+                <div id="quiz-options" class="options-grid"></div>
+                <div id="quiz-feedback" class="hidden"></div>
+                <button id="quiz-next-btn" class="btn-primary hidden">Question Suivante</button>
+                <div class="current-score-box">Score : <span id="quiz-score-display">0</span></div>
+            </div>
+
+            <div id="quiz-results" class="hidden">
+                <h2>Quiz Terminé !</h2>
+                <div class="result-circle">
+                    <span id="result-score">0</span>
+                    <small>points</small>
+                </div>
+                <p id="result-rank"></p>
+                <div class="progress-container"><div id="result-progress" class="progress-bar"></div></div>
+                <h3>Vos recommandations :</h3>
+                <ul id="result-recommendations"></ul>
+                <h3>Classement Local :</h3>
+                <ol id="result-top-scores"></ol>
+                <button id="quiz-restart-btn" class="btn-primary">Rejouer</button>
+            </div>
+        </section>
     </main>
     <script src="js/app.be455afc.min.js"></script>
     <script src="js/cipher.079745bd.min.js"></script>
@@ -177,5 +263,8 @@
     <script src="js/phishing.4e6ac2a7.min.js"></script>
     <script src="js/quiz-data.c4c17637.min.js"></script>
     <script src="js/quiz.0f6e038c.min.js"></script>
-</body>
+    <script src="js/report.js"></script>
+    <script src="js/password.js"></script>
+    <script src="js/app.js"></script>
+    </body>
 </html>
