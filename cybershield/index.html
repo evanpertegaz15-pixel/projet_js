@@ -21,6 +21,7 @@
             <button class="tab-btn" data-module="cipher">Chiffrement</button>
             <button class="tab-btn" data-module="phishing">Phishing</button>
             <button class="tab-btn" data-module="dashboard">Veille</button>
+            <button class="tab-btn" data-module="quiz">Quiz</button>
         </nav>
         <section id="password-analyzer" class="module-card">
             <div class="card-header">
@@ -168,13 +169,72 @@
                 <p>Chargement des actualités...</p>
             </div>
         </section>
+        <section id="quiz" class="module-card hidden">
+            <div class="card-header">
+                <h2>Quiz CyberShield</h2>
+                <p>Testez vos connaissances en cybersécurité.</p>
+            </div>
+            <div id="quiz-start">
+                <p>Êtes-vous prêt à tester vos connaissances ?</p>
+                <div id="quiz-scores-preview" class="hidden"></div>
+                <button id="quiz-start-btn">Commencer le quiz</button>
+            </div>
+            <div id="quiz-game" class="hidden">
+                <div class="quiz-meta">
+                    <div id="quiz-question-counter">Question 1 / 10</div>
+                    <div id="quiz-timer" class="quiz-timer-value">20</div>
+                </div>
+                <div class="quiz-progress">
+                    <div id="quiz-progress-bar" class="progress-bar"></div>
+                </div>
+                <div class="quiz-stats">
+                    <div class="quiz-stat-box">
+                        <span>Score</span>
+                        <span id="quiz-score-display">0</span>
+                    </div>
+                    <div class="quiz-stat-box">
+                        <span>Streak</span>
+                        <span id="quiz-streak-display">0</span>
+                    </div>
+                </div>
+                <div id="quiz-level-badge" class="quiz-level-badge">Facile</div>
+                <div id="quiz-question-text" class="quiz-question">Question here</div>
+                <div id="quiz-options" class="quiz-options"></div>
+                <div id="quiz-feedback" class="quiz-feedback hidden"></div>
+                <button id="quiz-next-btn" class="hidden">Question suivante</button>
+            </div>
+            <div id="quiz-results" class="hidden">
+                <div class="result-score-block">
+                    <div>
+                        <div class="quiz-rank-label">Score final</div>
+                        <div id="result-score">0</div>
+                    </div>
+                    <div>
+                        <div class="quiz-rank-label">Rang</div>
+                        <div id="result-rank">#1</div>
+                    </div>
+                </div>
+                <div class="progress-container result-progress">
+                    <div id="result-progress" class="progress-bar"></div>
+                </div>
+                <div class="result-section">
+                    <h3>Recommandations</h3>
+                    <ul id="result-recommendations" class="result-list"></ul>
+                </div>
+                <div class="result-section">
+                    <h3>Meilleurs scores</h3>
+                    <ul id="result-top-scores" class="result-list result-top"></ul>
+                </div>
+                <button id="quiz-restart-btn">Recommencer</button>
+            </div>
+        </section>
     </main>
-    <script src="js/app.6e9d337c.min.js"></script>
-    <script src="js/cipher.966c753d.min.js"></script>
-    <script src="js/dashboard.f4510073.min.js"></script>
-    <script src="js/password.d4130048.min.js"></script>
-    <script src="js/phishing.4bb97583.min.js"></script>
-    <script src="js/quiz-data.e569e3c2.min.js"></script>
-    <script src="js/quiz.7e37a152.min.js"></script>
+    <script src="js/app.be455afc.min.js"></script>
+    <script src="js/cipher.079745bd.min.js"></script>
+    <script src="js/dashboard.feaf216d.min.js"></script>
+    <script src="js/password.34f9f378.min.js"></script>
+    <script src="js/phishing.4e6ac2a7.min.js"></script>
+    <script src="js/quiz-data.c4c17637.min.js"></script>
+    <script src="js/quiz.0f6e038c.min.js"></script>
 </body>
 </html>

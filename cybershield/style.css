@@ -494,3 +494,13 @@ header p span {
 }
 
 .result-list small { color: var(--text-muted); font-size: 0.8rem; margin-left: 6px; }
+
+#result-score {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.result-progress {
+    margin-bottom: 2rem;
+}
