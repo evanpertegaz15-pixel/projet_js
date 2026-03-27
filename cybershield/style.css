@@ -367,7 +367,36 @@ header p span {
     z-index: 1000;
 }
 
-.report-trigger-btn:hover {
-    background-color: #1d4ed8;
-    transform: scale(1.05);
+.quiz-scores-preview ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+.quiz-scores-preview li { color: var(--text-muted); font-size: 0.85rem; }
+
+.result-score-block {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
+
+.quiz-rank-label { font-weight: 700; font-size: 1rem; color: var(--dark); margin-bottom: 4px; }
+
+.result-section { margin-bottom: 1.5rem; }
+.result-section h3 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+
+.result-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.result-list li {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.result-top .current-score {
+    border-color: var(--primary);
+    background: rgba(37,99,235,0.06);
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.result-list small { color: var(--text-muted); font-size: 0.8rem; margin-left: 6px; }
