@@ -2,7 +2,7 @@ import fs from "fs";
 import crypto from "crypto";
 import JavaScriptObfuscator from "javascript-obfuscator";
 
-const files = ["cybershield/js/cipher.js", "cybershield/js/password.js", "cybershield/js/app.js", "cybershield/js/phishing.js", "cybershield/js/dashboard.js", "cybershield/js/quiz.js", "cybershield/js/quiz-data.js"];
+const files = ["cybershield/js/cipher.js", "cybershield/js/password.js", "cybershield/js/app.js", "cybershield/js/phishing.js", "cybershield/js/dashboard.js", "cybershield/js/quiz.js", "cybershield/js/quiz-data.js", "cybershield/js/report.js"];
 for (const file of files) {
     if (!fs.existsSync(file)) {
         console.error(`Erreur : Le fichier ${file} est introuvable.`);
